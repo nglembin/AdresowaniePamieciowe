@@ -1,21 +1,23 @@
 ORG 100h
 
-MOV AH, 09h           ; funkcja do wypisywania stringa
-LEA DX, napis         ; adres stringa
-INT 21h               ; wypisujemy aż do '$'
+MOV AH, 09h         ; funkcja DOS: wypisz string zakończony znakiem $
+LEA DX, tekst       ; załaduj adres tekstu do rejestru DX
+INT 21h             ; wywołanie funkcji DOS
 
-MOV AH, 02h           ; nowa linia – CR
-MOV DL, 0Dh
+MOV DL, 0Ah         ; nowa linia w dół
+MOV AH, 02h
 INT 21h
 
-MOV DL, 0Ah           ; nowa linia – LF
+MOV DL, 0Dh         ;  powrót kursora na początek linii
+MOV AH, 02h
 INT 21h
 
-MOV AH, 02h           ; wypisujemy 3. znak stringa
-MOV DL, napis[2]
+MOV AH, 09h         ; znowu funkcja do wypisywania tekstu
+LEA DX, tekstSkrocony ; adres skróconego tekstu
+INT 21h           
+
+MOV AH, 4Ch         ; zakończ program
 INT 21h
 
-MOV AH, 4Ch
-INT 21h
-
-napis DB 'mhyla to mega ziomek$', 0Dh, 0Ah  ; string z zakończeniem '$' i enterem
+tekst DB 'mhyla to mega ziomek$'
+tekstSkrocony DB 'mhy$'  ; pierwsze 3 znaki z tekstu
