@@ -1,4 +1,4 @@
-ORG 100h              ; standardowy offset dla plików COM
+ORG 100h             
 
 MOV AH, 0Ah           ; funkcja do wczytania stringa
 LEA DX, bufor         ; adres bufora
