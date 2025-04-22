@@ -19,5 +19,5 @@ INT 21h
 MOV AH, 4Ch         ; zakończ program
 INT 21h
 
-tekst DB 'mhyla to mega ziomek$'
+tekst DB 'mhyla to mega ziomek, ale pepsi lepsze niz cola$'
 tekstSkrocony DB 'mhy$'  ; pierwsze 3 znaki z tekstu
