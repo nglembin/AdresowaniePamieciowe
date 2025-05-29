@@ -1,23 +1,20 @@
 ORG 100h
 
-MOV AH, 09h         ; funkcja DOS: wypisz string zakończony znakiem $
-LEA DX, tekst       ; załaduj adres tekstu do rejestru DX
-INT 21h             ; wywołanie funkcji DOS
-
-MOV DL, 0Ah         ; nowa linia w dół
-MOV AH, 02h
+MOV DX, OFFSET calyTekst
+MOV AH, 09h       ; wypisujemy cały string (do '$')
 INT 21h
 
-MOV DL, 0Dh         ;  powrót kursora na początek linii
-MOV AH, 02h
+MOV DX, OFFSET nowaLinia
+MOV AH, 09h       ; wypisujemy znak nowej linii (0Dh 0Ah)
 INT 21h
 
-MOV AH, 09h         ; znowu funkcja do wypisywania tekstu
-LEA DX, tekstSkrocony ; adres skróconego tekstu
-INT 21h           
-
-MOV AH, 4Ch         ; zakończ program
+MOV DX, OFFSET do3znaku
+MOV AH, 09h       ; wypisujemy tylko do trzeciego znaku, zakończonego '$'
 INT 21h
 
-tekst DB 'mhyla to mega ziomek, ale pepsi lepsze niz cola$'
-tekstSkrocony DB 'mhy$'  ; pierwsze 3 znaki z tekstu
+INT 20h           ; koniec
+
+; teksty
+calyTekst  DB 'GLEMBIN$', 0
+nowaLinia  DB 0Dh, 0Ah, '$'
+do3znaku   DB 'GLE$', 0    ; tylko 3 znaki + '$'
